@@ -6,9 +6,27 @@ body {
   width: 200px;
   border-radius: 20%;
   border: 10px solid black;
+
+  margin: 10px;
 }
 
 .btn-container {
   display: flex;
   justify-content: center;
+}
+
+.yellow {
+  background-color: rgb(209, 209, 23);
+}
+
+.red {
+  background-color: rgb(129, 42, 42);
+}
+
+.green {
+  background-color: rgb(41, 107, 41);
+}
+
+.purple {
+  background-color: rgb(126, 25, 126);
 }
