@@ -41,6 +41,7 @@ function userFlash(btn) {
 
 // Generating color
 function levelUp() {
+  userSeq = [];
   level++;
   h2.innerText = `Level ${level}`; // Here will come "LEVEL 1 " because earlier it was 0 then after incrementing it will become 1 from 0;
 
@@ -55,26 +56,112 @@ function levelUp() {
   gameFlash(randBtn);
 }
 
-// To Check the User's sequence and Game's sequence
-function checkSeq() {
-  let idx = level - 1;
-  if (userSeq[idx] === gameSeq[idx]) {
-    console.log("Same Value");
-  } else {
-    h2.innerText = `Game Over!! Press any key to Start Again.`;
-  }
-}
-
 function btnPress() {
   console.log(this);
   let btn = this;
   userFlash(btn); // properties of btn of gameFlash will be applied here .
   let userColor = btn.getAttribute("id"); // To fetch color from ID attribute in HTML.
   console.log(userColor);
-  checkSeq();
+  userSeq.push(userColor);
+  checkAns(userSeq.length - 1);
+}
+
+// To Check the User's sequence and Game's sequence
+function checkAns() {
+  let idx = level - 1;
+  if (userSeq[idx] === gameSeq[idx]) {
+    if (userSeq.length == gameSeq.length) {
+      setTimeout(levelUp, 100);
+    }
+  } else {
+    h2.innerText = `Game Over!! Press any key to Start Again.`;
+  }
+  console.log("Curr Level = ", level);
 }
 
 let allBtns = document.querySelectorAll(".btn");
 for (btn of allBtns) {
   btn.addEventListener("click", btnPress);
 }
+
+// Define colors and buttons
+// const colors = ["red", "yellow", "green", "purple"];
+// const buttons = document.querySelectorAll(".btn");
+
+// let gameSequence = [];
+// let userSequence = [];
+// let level = 0;
+// let isUserTurn = false;
+
+// const h2 = document.querySelector("h2");
+
+// document.addEventListener("keypress", () => {
+//   if (level === 0) {
+//     startGame();
+//   }
+// });
+
+// function startGame() {
+//   level = 1;
+//   gameSequence = [];
+//   userSequence = [];
+//   isUserTurn = false;
+//   h2.innerText = `Level ${level}`;
+//   generateRandomColor();
+// }
+
+// function generateRandomColor() {
+//   const randomColor = colors[Math.floor(Math.random() * 4)];
+//   gameSequence.push(randomColor);
+//   playSequence();
+// }
+
+// function playSequence() {
+//   isUserTurn = false;
+//   let i = 0;
+//   const interval = setInterval(() => {
+//     flashButton(gameSequence[i]);
+//     i++;
+//     if (i >= gameSequence.length) {
+//       clearInterval(interval);
+//       isUserTurn = true;
+//     }
+//   }, 1000);
+// }
+
+// function flashButton(color) {
+//   const button = document.querySelector(`.${color}`);
+//   button.classList.add("flash");
+//   setTimeout(() => {
+//     button.classList.remove("flash");
+//   }, 500);
+// }
+
+// function checkUserInput() {
+//   if (userSequence.length === gameSequence.length) {
+//     if (JSON.stringify(userSequence) === JSON.stringify(gameSequence)) {
+//       level++;
+//       userSequence = [];
+//       h2.innerText = `Level ${level}`;
+//       setTimeout(generateRandomColor, 1000);
+//     } else {
+//       gameOver();
+//     }
+//   }
+// }
+
+// function gameOver() {
+//   h2.innerText = "Game Over! Press any key to restart.";
+//   level = 0;
+// }
+
+// buttons.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     if (isUserTurn) {
+//       const color = button.classList[1];
+//       userSequence.push(color);
+//       flashButton(color);
+//       checkUserInput();
+//     }
+//   });
+// });
