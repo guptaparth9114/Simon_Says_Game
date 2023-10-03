@@ -74,14 +74,22 @@ function checkAns() {
       setTimeout(levelUp, 100);
     }
   } else {
-    h2.innerText = `Game Over!! Press any key to Start Again.`;
+    h2.innerHTML = `Game Over!! YOUR SCORE WAS =  <b> ${level} </b>Press any key to Start Again.`;
   }
   console.log("Curr Level = ", level);
+  reset();
 }
 
 let allBtns = document.querySelectorAll(".btn");
 for (btn of allBtns) {
   btn.addEventListener("click", btnPress);
+}
+
+function reset() {
+  started = false;
+  gameSeq = [];
+  userSeq = [];
+  level = 0;
 }
 
 // Define colors and buttons
